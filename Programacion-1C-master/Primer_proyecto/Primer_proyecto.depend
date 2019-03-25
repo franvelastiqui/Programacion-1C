@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1553478280 source:c:\users\alumno\desktop\photoshop\primer_proyecto\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1553515022 source:c:\users\alumno\desktop\programacion-1c-master\primer_proyecto\main.c
+	<stdio.h>
+	<stdlib.h>
+

@@ -1,0 +1,1 @@
+float pedirNumero(char[]);

@@ -43,8 +43,7 @@ int buscarMaximo(int unNumero[], int tam)
 int buscarValor(int numero[], int tam, int valor)
 {
     int i;
-    int indice;
-    int flag=0;
+    int indice=-1;
 
     printf("Ingrese numero a buscar: ");
     scanf("%d",&valor);
@@ -54,14 +53,10 @@ int buscarValor(int numero[], int tam, int valor)
     {
         if(valor==numero[i])
         {
-            indice=i+1;
-            flag=1;
+            indice=i;
         }
     }
-    if (flag==0)
-    {
-        indice=-1;
-    }
+
     return indice;
 }
 

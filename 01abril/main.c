@@ -21,8 +21,14 @@ int main()
 
     indice=buscarValor(valorDeVector,T,valor);
 
-    if()
-    printf("Su indice es %d",indice);
+    if(indice==-1)
+    {
+        printf("No se encontraron resultados.");
+    }
+    else
+    {
+        printf("El indice es: %d",indice);
+    }
 
     return 0;
 }

@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1553610622 source:c:\users\alumno\desktop\tp1\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1554256794 source:d:\mis cosas\mis documentos\programacion-1c-master\programacion-1c\tp1\operaciones.c
+	"Operaciones.h"
+
+1554256794 d:\mis cosas\mis documentos\programacion-1c-master\programacion-1c\tp1\operaciones.h
+
+1554255756 source:d:\mis cosas\mis documentos\programacion-1c-master\programacion-1c\tp1\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Operaciones.h"
+

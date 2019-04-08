@@ -1,0 +1,31 @@
+# depslib dependency file v1.0
+1554131080 source:c:\users\alumno\desktop\01abril\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Numeros.h"
+
+1554129846 c:\users\alumno\desktop\01abril\numeros.h
+
+1554131080 source:c:\users\alumno\desktop\01abril\numeros.c
+	"Numeros.h"
+
+1554208578 source:d:\mis cosas\mis documentos\programacion-1c-master\01abril\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Numeros.h"
+
+1554118620 d:\mis cosas\mis documentos\programacion-1c-master\01abril\numeros.h
+
+1554208644 source:d:\mis cosas\mis documentos\programacion-1c-master\01abril\numeros.c
+	"Numeros.h"
+
+1554209093 source:c:\users\alumno\desktop\ejercicio-vectores-1c-master\velastiqui, franco. 1c\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Numeros.h"
+
+1554726977 c:\users\alumno\desktop\ejercicio-vectores-1c-master\velastiqui, franco. 1c\numeros.h
+
+1554726977 source:c:\users\alumno\desktop\ejercicio-vectores-1c-master\velastiqui, franco. 1c\numeros.c
+	"Numeros.h"
+

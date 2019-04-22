@@ -20,5 +20,10 @@ void mostrarListaEmpleados(eEmpleado[], int);
 int buscarLibre(eEmpleado[], int);
 void inicializarEmpleados(eEmpleado[], int);
 void hardcodearDatosEmpleados(eEmpleado[], int);
-int pedirEntero(void);
+int pedirEntero(char[]);
 void modificarEmpleado(eEmpleado[], int, int);
+void bajarEmpleado(eEmpleado[], int, int);
+float importeMaximo(eEmpleado[], int);
+void mostrarSueldoMaximo(eEmpleado[], int);
+
+int menuDeOpciones(char[]);

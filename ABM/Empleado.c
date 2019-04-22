@@ -83,9 +83,9 @@ void hardcodearDatosEmpleados(eEmpleado lista[], int tam)
 {
     int i;
     int legajos[]= {1,8,9,7,2,4};
-    char nombres[][50]= {"Maria","Pedro","Jose","Pedro","Pablo","Mateo"};
-    char sexo[]= {'F','M','M','M','M','M'};
-    float sueldosBruto[]= {8000,2000,3000,4000,5000,6000};
+    char nombres[][50]= {"Carlos","Maria","Carlos","Pedro","Carlos","Mateo"};
+    char sexo[]= {'M','F','M','M','M','M'};
+    float sueldosBruto[]= {22000,22000,15000,4000,21000,6000};
 
     for(i=0; i<tam; i++)
     {
@@ -100,39 +100,142 @@ void hardcodearDatosEmpleados(eEmpleado lista[], int tam)
 }
 
 //_______________________________________________________________________
-int pedirEntero(void)
+int pedirEntero(char texto[])
 
 {
     int numero;
-    printf("Introduzca el legajo a buscar: ");
+
+    printf(texto);
     scanf("%d",&numero);
     return numero;
 }
 
 
 //_______________________________________________________________________
-
 void modificarEmpleado(eEmpleado lista[], int tam, int legajo)
+{
+    int i;
+    int flag=0;
+    int opcion;
+
+    legajo=pedirEntero("Ingrese el legajo del empleado a modificar: ");
+
+    for(i=0; i<tam; i++)
     {
-        int i;
-        int flag=0;
-
-        legajo=pedirEntero();
-
-        for(i=0; i<tam; i++)
+        if (legajo==lista[i].legajo)
         {
-            if (legajo==lista[i].legajo)
+            opcion=menuDeOpciones("Escoja el campo a modificar:\n1.Nombre\n2.Sexo\n3.Sueldo bruto\n4.Salir\nElija una opcion: ");
+            switch(opcion)
             {
+            case 1:
+                printf("Ingrese el nuevo nombre: ");
+                fflush(stdin);
+                gets(lista[i].nombre);
+                flag=1;
+                break;
+            case 2:
+                printf("Ingrese el nuevo sexo: ");
+                fflush(stdin);
+                scanf("%c", &lista[i].sexo);
+                flag=1;
+                break;
+            case 3:
                 printf("Ingrese el nuevo sueldo bruto: ");
                 scanf("%f", &lista[i].sueldoBruto);
                 lista[i].sueldoNeto=lista[i].sueldoBruto*0.85;
                 flag=1;
                 break;
+            case 4:
+                flag=1;
+                break;
             }
 
         }
-        if(flag=0)
+    }
+    if(flag==0)
+    {
+        printf("No ingreso un legajo valido\n");
+    }
+}
+
+
+//_______________________________________________________________________
+void bajarEmpleado(eEmpleado lista[], int tam, int legajo)
+{
+    int i;
+    int flag=0;
+
+    legajo=pedirEntero("Ingrese el legajo del empleado a dar de baja: ");
+
+    for(i=0; i<tam; i++)
+    {
+        if (legajo==lista[i].legajo)
         {
-            printf("No ingreso un legajo valido\n");
+            printf("Se ha dado de baja al siguiente empleado:\n");
+            mostrarEmpleado(lista[i]);
+            lista[i].estado = LIBRE;
+            flag=1;
         }
     }
+    if(flag==0)
+    {
+        printf("No ingreso un legajo valido\n");
+    }
+}
+
+
+//_______________________________________________________________________
+int menuDeOpciones(char mensaje[])
+{
+    int opcion;
+    printf("%s", mensaje);
+    fflush(stdin);
+    scanf("%d", &opcion);
+
+    return opcion;
+}
+
+
+//_______________________________________________________________________
+float importeMaximo(eEmpleado lista[], int tam)
+{
+    int i;
+    float sueldo=0;
+    int flag=0;
+
+    for(i=0; i<tam; i++)
+    {
+        if(lista[i].estado==OCUPADO)
+        {
+            if(lista[i].sueldoBruto>sueldo || flag==0)
+            {
+                sueldo=lista[i].sueldoBruto;
+                flag=1;
+            }
+        }
+    }
+
+    return sueldo;
+}
+
+
+//_______________________________________________________________________
+void mostrarSueldoMaximo(eEmpleado lista [], int tam)
+{
+    float sueldo;
+    int i;
+
+    sueldo=importeMaximo(lista, tam);
+
+    for(i=0; i<tam; i++)
+    {
+        if(lista[i].estado==OCUPADO)
+        {
+            if(sueldo==lista[i].sueldoBruto)
+            {
+                mostrarEmpleado(lista[i]);
+            }
+        }
+    }
+
+}

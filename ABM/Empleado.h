@@ -29,6 +29,7 @@ void cargarEmpleado(eEmpleado[], int, eSector[], int);
 void mostrarListaEmpleados(eEmpleado[], int, eSector[], int);
 
 int buscarLibre(eEmpleado[], int);
+int buscarLibrePorValor(eEmpleado[], int, int);
 void inicializarEmpleados(eEmpleado[], int);
 void hardcodearDatosEmpleados(eEmpleado[], int, eSector[], int);
 int pedirEntero(char[]);
@@ -38,6 +39,7 @@ void bajarEmpleado(eEmpleado[], int, int, eSector[], int);
 float importeMaximo(eEmpleado[], int);
 void mostrarSueldoMaximo(eEmpleado[], int, eSector[], int);
 int contarCarlos(eEmpleado[],int);
-void mostrarSector(eEmpleado[],int,eSector[],int);
+void elegirSector(eEmpleado[],int,eSector[],int);
+void mostrarSector(eEmpleado[],int,eSector[],int,int);
 
 int menuDeOpciones(char[]);

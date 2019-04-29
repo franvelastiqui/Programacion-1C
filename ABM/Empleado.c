@@ -8,46 +8,58 @@ void cargarEmpleado(eEmpleado lista[], int tam, eSector sectores[], int ts)
 {
     int i;
     int j;
+    int valor;
+    int indice;
     float valorHoraSector;
 
     i = buscarLibre(lista, tam);
     if(i!=-1)
     {
         printf("Ingrese legajo: ");
-        scanf("%d", &lista[i].legajo);
-        printf("Ingrese nombre: ");
-        fflush(stdin);
-        gets(lista[i].nombre);
-        printf("Ingrese sexo: ");
-        fflush(stdin);
-        scanf("%c", &lista[i].sexo);
+        scanf("%d", &valor);
 
-        //en funcion
-        for(j=0; j<ts; j++)
+        indice=buscarLibrePorValor(lista, tam, valor);
+
+        if(indice!=-1)
         {
-            printf("%d\t %s\n",sectores[j].idSector, sectores[j].descripcion);
-        }
-        printf("Elija sector:\n");
-        scanf("%d", &lista[i].idSector);
+            lista[i].legajo=valor;
+            printf("Ingrese nombre: ");
+            fflush(stdin);
+            gets(lista[i].nombre);
+            printf("Ingrese sexo: ");
+            fflush(stdin);
+            scanf("%c", &lista[i].sexo);
 
-
-        printf("Ingrese cantidad de horas: ");
-        scanf("%d", &lista[i].cantidadHoras);
-
-        for(j=0; j<ts; j++)
-        {
-            if(lista[i].idSector == sectores[j].idSector)
+            //en funcion
+            for(j=0; j<ts; j++)
             {
-                valorHoraSector=sectores[j].valor;
+                printf("%d\t %s\n",sectores[j].idSector, sectores[j].descripcion);
             }
+            printf("Elija sector:\n");
+            scanf("%d", &lista[i].idSector);
+
+
+            printf("Ingrese cantidad de horas: ");
+            scanf("%d", &lista[i].cantidadHoras);
+
+            for(j=0; j<ts; j++)
+            {
+                if(lista[i].idSector == sectores[j].idSector)
+                {
+                    valorHoraSector=sectores[j].valor;
+                }
+            }
+
+            lista[i].sueldoBruto=valorHoraSector*lista[i].cantidadHoras;
+
+            lista[i].sueldoNeto =lista[i].sueldoBruto*0.85;
+
+            lista[i].estado = OCUPADO;
         }
-
-        lista[i].sueldoBruto=valorHoraSector*lista[i].cantidadHoras;
-
-        lista[i].sueldoNeto =lista[i].sueldoBruto*0.85;
-
-        lista[i].estado = OCUPADO;
-
+        else
+        {
+            printf("El legajo esta OCUPADO\n");
+        }
     }
     else
     {
@@ -103,6 +115,24 @@ int buscarLibre(eEmpleado lista[], int tam)
     return index;
 }
 
+
+//_______________________________________________________________________
+int buscarLibrePorValor(eEmpleado lista[], int tam, int valor)
+{
+    int i;
+    int index=-1;
+    for(i=0; i<tam; i++)
+    {
+        if(lista[i].legajo==valor && lista[i].estado==OCUPADO)
+        {
+            return index;
+        }
+    }
+    index=i;
+    return index;
+}
+
+
 //_______________________________________________________________________
 void inicializarEmpleados(eEmpleado lista[], int tam)
 {
@@ -110,6 +140,7 @@ void inicializarEmpleados(eEmpleado lista[], int tam)
     for(i=0; i<tam; i++)
     {
         lista[i].estado = LIBRE;
+        lista[i].legajo = -2;
     }
 }
 
@@ -185,7 +216,7 @@ void modificarEmpleado(eEmpleado lista[], int tam, int legajo, eSector sectores[
 
     for(i=0; i<tam; i++)
     {
-        if (legajo==lista[i].legajo)
+        if (legajo==lista[i].legajo && lista[i].estado==OCUPADO)
         {
             mostrarEmpleado(lista[i], sectores, ts);
             opcion=menuDeOpciones("Escoja el campo a modificar:\n1.Nombre\n2.Sexo\n3.Sector\n4.Salir\nElija una opcion: ");
@@ -329,21 +360,45 @@ int contarCarlos(eEmpleado lista[], int tam)
 }
 
 //_______________________________________________________________________
-void mostrarSector(eEmpleado lista[], int tam, eSector sectores[], int ts)
+void elegirSector(eEmpleado lista[], int tam, eSector sectores[], int ts)
 {
     int i;
-    int j;
+    int opcion;
 
-    for(i=0; i<ts; i++)
+    opcion=menuDeOpciones("Elija el sector a mostrar:\n1.Contabilidad\n2.Sistemas\n3.RRHH\n4.Todos\n");
+
+    if(opcion>=1 && opcion<=4)
     {
-        printf("Lista de empleados de %s\n\n",sectores[i].descripcion);
-        for(j=0; j<tam; j++)
+        if(opcion>=1 && opcion<4)
         {
-            if(sectores[i].idSector==lista[j].idSector)
+            printf("Lista de empleados de %s\n\n",sectores[opcion].descripcion);
+            mostrarSector(lista,tam,sectores,ts);
+        }
+        else
+        {
+            for(i=0; i<ts; i++)
             {
-                mostrarEmpleado(lista[j],sectores, ts);
+                printf("Lista de empleados de %s\n\n",sectores[i].descripcion);
+                mostrarSector(lista,tam,sectores,ts);
             }
         }
     }
+    else
+    {
+        printf("No ingreso una opcion valida");
+    }
+
 }
 
+//_______________________________________________________________________
+void mostrarSector(eEmpleado lista[], int tam, eSector sectores[], int ts)
+{
+
+for(j=0; j<tam; j++)
+    {
+        if(sectores[i].idSector==lista[j].idSector && lista[j].estado==OCUPADO)
+        {
+            mostrarEmpleado(lista[j],sectores, ts);
+        }
+    }
+}

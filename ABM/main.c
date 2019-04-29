@@ -35,7 +35,7 @@ int main()
             mostrarListaEmpleados(lista, T, sectores, TS);
             break;
         case 5:
-            mostrarSector(lista, T, sectores, TS);
+            elegirSector(lista, T, sectores, TS);
 
         }
         system("pause");

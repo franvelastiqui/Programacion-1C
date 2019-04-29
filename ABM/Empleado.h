@@ -24,6 +24,14 @@ typedef struct
     int estado;
 } eEmpleado;
 
+typedef struct
+{
+    int idSector;
+    char descripcion[20];
+    int cantidadEmpleados;
+    float sueldos;
+} eAuxiliar;
+
 void mostrarEmpleado(eEmpleado, eSector[], int);
 void cargarEmpleado(eEmpleado[], int, eSector[], int);
 void mostrarListaEmpleados(eEmpleado[], int, eSector[], int);
@@ -39,7 +47,8 @@ void bajarEmpleado(eEmpleado[], int, int, eSector[], int);
 float importeMaximo(eEmpleado[], int);
 void mostrarSueldoMaximo(eEmpleado[], int, eSector[], int);
 int contarCarlos(eEmpleado[],int);
-void elegirSector(eEmpleado[],int,eSector[],int);
-void mostrarSector(eEmpleado[],int,eSector[],int,int);
+void mostrarSector(eEmpleado[],int,eSector[],int);
+void calcularSueldosSector(eEmpleado[],int,eSector[],int);
+void mostrarSectorConMasEmpleados(eEmpleado[], int, eSector[], int);
 
 int menuDeOpciones(char[]);

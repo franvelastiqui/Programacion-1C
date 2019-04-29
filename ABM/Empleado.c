@@ -211,6 +211,7 @@ void modificarEmpleado(eEmpleado lista[], int tam, int legajo, eSector sectores[
     int j;
     int flag=0;
     int opcion;
+    float valor;
 
     legajo=pedirEntero("Ingrese el legajo del empleado a modificar: ");
 
@@ -219,7 +220,7 @@ void modificarEmpleado(eEmpleado lista[], int tam, int legajo, eSector sectores[
         if (legajo==lista[i].legajo && lista[i].estado==OCUPADO)
         {
             mostrarEmpleado(lista[i], sectores, ts);
-            opcion=menuDeOpciones("Escoja el campo a modificar:\n1.Nombre\n2.Sexo\n3.Sector\n4.Salir\nElija una opcion: ");
+            opcion=menuDeOpciones("Escoja el campo a modificar:\n1.Nombre\n2.Sexo\n3.Cantidad de horas\n4.Sector\n5.Salir\nElija una opcion: ");
             switch(opcion)
             {
             case 1:
@@ -235,6 +236,21 @@ void modificarEmpleado(eEmpleado lista[], int tam, int legajo, eSector sectores[
                 flag=1;
                 break;
             case 3:
+                printf("Ingrese la nueva cantidad de horas: ");
+                scanf("%d", &lista[i].cantidadHoras);
+                for(j=0; j<ts; j++)
+                {
+                    if(lista[i].idSector == sectores[j].idSector)
+                    {
+                        valor=sectores[j].valor;
+                    }
+                }
+
+                lista[i].sueldoBruto=valor*lista[i].cantidadHoras;
+                lista[i].sueldoNeto = lista[i].sueldoBruto * 0.85;
+                flag=1;
+                break;
+            case 4:
                 for(j=0; j<ts; j++)
                 {
                     printf("%d\t %s\n",sectores[j].idSector, sectores[j].descripcion);
@@ -243,7 +259,7 @@ void modificarEmpleado(eEmpleado lista[], int tam, int legajo, eSector sectores[
                 scanf("%d", &lista[i].idSector);
                 flag=1;
                 break;
-            case 4:
+            case 5:
                 flag=1;
                 break;
             }
@@ -360,45 +376,100 @@ int contarCarlos(eEmpleado lista[], int tam)
 }
 
 //_______________________________________________________________________
-void elegirSector(eEmpleado lista[], int tam, eSector sectores[], int ts)
+void mostrarSector(eEmpleado lista[], int tam, eSector sectores[], int ts)
 {
     int i;
-    int opcion;
+    int j;
 
-    opcion=menuDeOpciones("Elija el sector a mostrar:\n1.Contabilidad\n2.Sistemas\n3.RRHH\n4.Todos\n");
 
-    if(opcion>=1 && opcion<=4)
+    for(i=0; i<ts; i++)
     {
-        if(opcion>=1 && opcion<4)
+        printf("Lista de empleados de %s\n",sectores[i].descripcion);
+        for(j=0; j<tam; j++)
         {
-            printf("Lista de empleados de %s\n\n",sectores[opcion].descripcion);
-            mostrarSector(lista,tam,sectores,ts);
-        }
-        else
-        {
-            for(i=0; i<ts; i++)
+            if(sectores[i].idSector==lista[j].idSector && lista[j].estado==OCUPADO)
             {
-                printf("Lista de empleados de %s\n\n",sectores[i].descripcion);
-                mostrarSector(lista,tam,sectores,ts);
+                mostrarEmpleado(lista[j],sectores, ts);
             }
         }
     }
-    else
-    {
-        printf("No ingreso una opcion valida");
-    }
+
 
 }
 
 //_______________________________________________________________________
-void mostrarSector(eEmpleado lista[], int tam, eSector sectores[], int ts)
+void calcularSueldosSector(eEmpleado lista[],int tam, eSector sectores[], int ts)
 {
+    eAuxiliar auxiliar[ts];
+    int i;
+    int j;
 
-for(j=0; j<tam; j++)
+    for(i=0; i<ts; i++)
     {
-        if(sectores[i].idSector==lista[j].idSector && lista[j].estado==OCUPADO)
+        auxiliar[i].idSector=sectores[i].idSector;
+        strcpy(auxiliar[i].descripcion,sectores[i].descripcion);
+        auxiliar[i].sueldos=0;
+    }
+
+    for(i=0; i<ts; i++)
+    {
+        for(j=0; j<tam; j++)
         {
-            mostrarEmpleado(lista[j],sectores, ts);
+            if(auxiliar[i].idSector==lista[j].idSector && lista[j].estado==OCUPADO)
+            {
+                auxiliar[i].sueldos+=lista[j].sueldoNeto;
+            }
+        }
+    }
+
+    for(i=0; i<ts; i++)
+    {
+        printf("Sector: %s\t\t%.2f\n",auxiliar[i].descripcion,auxiliar[i].sueldos);
+    }
+}
+
+
+//_______________________________________________________________________
+void mostrarSectorConMasEmpleados(eEmpleado lista[], int tam, eSector sectores[], int ts)
+{
+    eAuxiliar auxiliar[ts];
+    int i;
+    int j;
+    int maximo;
+    int flag=0;
+
+    for(i=0; i<ts; i++)
+    {
+        auxiliar[i].idSector=sectores[i].idSector;
+        strcpy(auxiliar[i].descripcion,sectores[i].descripcion);
+        auxiliar[i].cantidadEmpleados=0;
+    }
+
+    for(i=0; i<ts; i++)
+    {
+        for(j=0; j<tam; j++)
+        {
+            if(auxiliar[i].idSector==lista[j].idSector && lista[j].estado==OCUPADO)
+            {
+                auxiliar[i].cantidadEmpleados++;
+            }
+        }
+    }
+
+    for(i=0; i<ts; i++)
+    {
+        if(flag==0 || auxiliar[i].cantidadEmpleados>maximo)
+        {
+            maximo=auxiliar[i].cantidadEmpleados;
+            flag=1;
+        }
+    }
+
+    for(i=0; i<ts; i++)
+    {
+        if(auxiliar[i].cantidadEmpleados==maximo)
+        {
+            printf("Sector: %s\t%d\n",sectores[i].descripcion,auxiliar[i].cantidadEmpleados);
         }
     }
 }

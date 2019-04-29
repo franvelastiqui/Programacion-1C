@@ -19,7 +19,7 @@ int main()
     hardcodearDatosEmpleados(lista,6, sectores, TS);
     do
     {
-        opcion = menuDeOpciones("1.Alta\n2.Baja\n3.Modificar\n4.Mostrar\n5.Informar Sectores\n6.Salir\nElija una opcion: ");
+        opcion = menuDeOpciones("1.Alta\n2.Baja\n3.Modificar\n4.Mostrar\n5.Informar Sectores\n6.Total Sueldos por Sector\n7.Sector con mas Empleados\n10.Salir\nElija una opcion: ");
         switch(opcion)
         {
         case 1:
@@ -35,13 +35,20 @@ int main()
             mostrarListaEmpleados(lista, T, sectores, TS);
             break;
         case 5:
-            elegirSector(lista, T, sectores, TS);
+            mostrarSector(lista, T, sectores, TS);
+            break;
+        case 6:
+            calcularSueldosSector(lista,T,sectores,TS);
+            break;
+        case 7:
+            mostrarSectorConMasEmpleados(lista,T,sectores,TS);
+            break;
 
         }
         system("pause");
         system("cls");
     }
-    while(opcion!=6);
+    while(opcion!=10);
 
 
     return 0;

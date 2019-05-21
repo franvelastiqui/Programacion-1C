@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1558448723 source:c:\users\alumno\desktop\punterosabm\main.c
+	<stdio.h>
+	<stdlib.h>
+	<strings.h>
+	"punterosABM.h"
+
+1558442099 c:\users\alumno\desktop\punterosabm\punterosabm.h
+
+1558442099 source:c:\users\alumno\desktop\punterosabm\punterosabm.c
+	"punterosABM.h"
+

@@ -3,7 +3,6 @@
 
 int main()
 {
-    //Escritura
 
     FILE* miArchivo;
 
@@ -11,9 +10,20 @@ int main()
 
     *x=4;
 
+    //Escritura
+
     miArchivo=fopen("Datos","wb");
 
-    fwrite(x,sizeof(int),1,miArchivo);
+    if(miArchivo!=NULL)
+    {
+        fwrite(x,sizeof(int),1,miArchivo);
+    }
+    else
+    {
+        printf("Hay un error con el archivo");
+    }
+
+
 
     fclose(miArchivo);
 
@@ -22,13 +32,21 @@ int main()
     //Lectura
 
 
-    miArchivo=fopen("Datos.dat","rb");
+    miArchivo=fopen("Datos","rb");
 
     fread(x,sizeof(int),1,miArchivo);
 
+    if(miArchivo!=NULL)
+    {
+        printf("%d",*x);
+    }
+    else
+    {
+        printf("Hay un error con el archivo");
+    }
+
     fclose(miArchivo);
 
-    printf("%d",*x);
 
     return 0;
 }

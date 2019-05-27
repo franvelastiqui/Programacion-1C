@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1558962978 source:c:\users\alumno\desktop\27mayo\elementos.c
+	<stdlib.h>
+	"Elementos.h"
+
+1558961109 c:\users\alumno\desktop\27mayo\elementos.h
+
+1558964260 source:c:\users\alumno\desktop\27mayo\main.c
+	<stdio.h>
+	"Elementos.h"
+	"string.h"
+

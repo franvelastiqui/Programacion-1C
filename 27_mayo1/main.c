@@ -4,6 +4,12 @@
 int main()
 {
 
+    //Crear de forma dinamica un empleado y asignarle valores:
+    //-Funcion que reciba empleado
+    //-Que lea de forma binaria y muestre
+    //-recibir un empleado: escriba en texto en empleado
+    //                      lea en texto y muestre
+
     FILE* miArchivo;
 
     int* x=(int*)malloc(sizeof(int));

@@ -11,34 +11,25 @@ Employee* employee_new()
     return empleado;
 }
 
-Employee* employee_newParametros(char* idStr,char* nombreStr,char* horasTrabajadasStr)
-{
-    char sueldo;
-
-    char* pSueldo=&sueldo;
-
-
-}
-
-employee_setId(Employee* empleado, int id)
+int employee_setId(Employee* empleado, int id)
 {
     empleado->id=id;
     return 1;
 }
 
-employee_setNombre(Employee* empleado, char nombre[])
+int employee_setNombre(Employee* empleado, char nombre[])
 {
     strcpy(empleado->nombre, nombre);
     return 1;
 }
 
-employee_setHorasTrabajadas(Employee* empleado, int horasTrabajadas)
+int employee_setHorasTrabajadas(Employee* empleado, int horasTrabajadas)
 {
     empleado->horasTrabajadas=horasTrabajadas;
     return 1;
 }
 
-employee_setSueldo(Employee* empleado, int sueldo)
+int employee_setSueldo(Employee* empleado, int sueldo)
 {
     empleado->sueldo=sueldo;
     return 1;

@@ -24,6 +24,9 @@ int main()
     int option = 0;
     LinkedList* listaEmpleados = ll_newLinkedList();
 
+    printf("1. Cargar los datos de los empleados desde el archivo data.csv (modo texto).");
+    scanf("%d",&option);
+
     do{
         switch(option)
         {

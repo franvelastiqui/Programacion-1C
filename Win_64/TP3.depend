@@ -83,3 +83,34 @@
 	"Employee.h"
 	<stdlib.h>
 
+1560176196 source:c:\users\alumno\desktop\win_64\controller.c
+	<stdio.h>
+	<stdlib.h>
+	"LinkedList.h"
+	"Employee.h"
+
+1560127464 c:\users\alumno\desktop\win_64\linkedlist.h
+
+1560167994 c:\users\alumno\desktop\win_64\employee.h
+
+1560175828 source:c:\users\alumno\desktop\win_64\main.c
+	<stdio.h>
+	<stdlib.h>
+	"LinkedList.h"
+	"Controller.h"
+	"Employee.h"
+
+1560127464 c:\users\alumno\desktop\win_64\controller.h
+
+1560174902 source:c:\users\alumno\desktop\win_64\employee.c
+	"Employee.h"
+	<stdlib.h>
+	"string.h"
+
+1560176032 source:c:\users\alumno\desktop\win_64\parser.c
+	<stdio.h>
+	<stdlib.h>
+	"LinkedList.h"
+	"Employee.h"
+	"string.h"
+

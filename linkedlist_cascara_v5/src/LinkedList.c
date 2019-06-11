@@ -56,6 +56,9 @@ static Node* getNode(LinkedList* this, int nodeIndex)
 {
     Node* pNode = NULL;
     int tam;
+    int i;
+
+    Node* aux;
 
     tam=ll_len(this);
 
@@ -63,7 +66,12 @@ static Node* getNode(LinkedList* this, int nodeIndex)
     {
         if(nodeIndex!=0 && nodeIndex<tam)
         {
-
+            aux=this->pFirstNode;
+            for(i=1;i<nodeIndex;i++)
+            {
+                aux=aux->pNextNode;
+            }
+            pNode=aux;
         }
     }
 
@@ -109,6 +117,8 @@ static int addNode(LinkedList* this, int nodeIndex,void* pElement)
 {
     int returnAux = -1;
     int tam;
+    int i;
+    Node* aux;
 
     tam=ll_len(this);
 
@@ -116,7 +126,13 @@ static int addNode(LinkedList* this, int nodeIndex,void* pElement)
     {
         if(nodeIndex!=0 && nodeIndex<tam)
         {
-
+            aux=this->pFirstNode;
+            for(i=1;i<nodeIndex;i++)
+            {
+                aux=aux->pNextNode;
+            }
+            aux->pElement=pElement;
+            returnAux=0;
         }
     }
 
@@ -135,6 +151,7 @@ static int addNode(LinkedList* this, int nodeIndex,void* pElement)
  */
 int test_addNode(LinkedList* this, int nodeIndex,void* pElement)
 {
+
     return addNode(this,nodeIndex,pElement);
 }
 
@@ -149,7 +166,7 @@ int test_addNode(LinkedList* this, int nodeIndex,void* pElement)
 int ll_add(LinkedList* this, void* pElement)
 {
     int returnAux = -1;
-    int indice=0;
+    int indice=1;
     Node* actual;
 
     if(this!=NULL)
@@ -161,6 +178,7 @@ int ll_add(LinkedList* this, void* pElement)
             actual=actual->pNextNode;
             indice++;
         }
+
         if(!(addNode(this, indice, pElement)));
         {
             returnAux=0;
@@ -181,6 +199,24 @@ int ll_add(LinkedList* this, void* pElement)
 void* ll_get(LinkedList* this, int index)
 {
     void* returnAux = NULL;
+    int tam;
+
+    Node* auxiliar;
+
+    tam=ll_len(this);
+
+    if(this!=NULL)
+    {
+        if(index>=0 || index<tam)
+        {
+            auxiliar=getNode(this, index);
+        }
+
+        if(auxiliar!=NULL)
+        {
+            returnAux=auxiliar;
+        }
+    }
 
     return returnAux;
 }
@@ -198,19 +234,33 @@ void* ll_get(LinkedList* this, int index)
 int ll_set(LinkedList* this, int index,void* pElement)
 {
     int returnAux = -1;
-    /*int i;
     int tam;
+    int indice=1;
+
+    Node* actual;
 
     tam=ll_len(this);
 
     if(this!=NULL)
     {
-        if(index!=0 && index<tam)
+        if(index>0 || index<tam)
         {
-            this=pElement;
-            returnAux=0;
+            actual=this->pFirstNode;
+
+            do
+            {
+                actual=actual->pNextNode;
+                indice++;
+            }
+            while(index!=indice);
+
+            if(index==indice);
+            {
+                actual->pElement=pElement;
+                returnAux=0;
+            }
         }
-    }*/
+    }
 
     return returnAux;
 }

@@ -64,10 +64,10 @@ static Node* getNode(LinkedList* this, int nodeIndex)
 
     if(this!=NULL)
     {
-        if(nodeIndex!=0 && nodeIndex<tam)
+        if(nodeIndex>=0 && nodeIndex<tam)
         {
             aux=this->pFirstNode;
-            for(i=1;i<nodeIndex;i++)
+            for(i=0; i<=nodeIndex; i++)
             {
                 aux=aux->pNextNode;
             }
@@ -88,13 +88,13 @@ static Node* getNode(LinkedList* this, int nodeIndex)
  */
 Node* test_getNode(LinkedList* this, int nodeIndex)
 {
-   int tam;
+    int tam;
 
     tam=ll_len(this);
 
     if(this!=NULL)
     {
-        if(nodeIndex==0 || nodeIndex>tam)
+        if(nodeIndex<0 || nodeIndex>tam)
         {
             this=NULL;
         }
@@ -124,14 +124,15 @@ static int addNode(LinkedList* this, int nodeIndex,void* pElement)
 
     if(this!=NULL)
     {
-        if(nodeIndex!=0 && nodeIndex<tam)
+        if(nodeIndex>=0 && nodeIndex<tam)
         {
             aux=this->pFirstNode;
-            for(i=1;i<nodeIndex;i++)
+            for(i=0; i<nodeIndex; i++)
             {
                 aux=aux->pNextNode;
             }
             aux->pElement=pElement;
+            this->size=tam+1;
             returnAux=0;
         }
     }
@@ -166,7 +167,7 @@ int test_addNode(LinkedList* this, int nodeIndex,void* pElement)
 int ll_add(LinkedList* this, void* pElement)
 {
     int returnAux = -1;
-    int indice=1;
+    int indice=0;
     Node* actual;
 
     if(this!=NULL)
@@ -183,6 +184,7 @@ int ll_add(LinkedList* this, void* pElement)
         {
             returnAux=0;
         }
+
     }
 
     return returnAux;
@@ -207,14 +209,14 @@ void* ll_get(LinkedList* this, int index)
 
     if(this!=NULL)
     {
-        if(index>=0 || index<tam)
+        if(index>=0 && index<tam)
         {
             auxiliar=getNode(this, index);
-        }
 
-        if(auxiliar!=NULL)
-        {
-            returnAux=auxiliar;
+            if(auxiliar!=NULL)
+            {
+                returnAux=auxiliar;
+            }
         }
     }
 
